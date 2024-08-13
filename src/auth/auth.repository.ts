@@ -1,3 +1,4 @@
+import { UserNotFound } from '../exceptions/UserNotFound.exception';
 import { User } from '../models/User';
 
 export class AuthRepository {
@@ -8,4 +9,18 @@ export class AuthRepository {
   async createUser(user: Partial<User>) {
     //
   }
+
+
+  async updateUserPartial(userId: string, updates: Partial<User>) {
+    const user = await User.findByPk(userId);
+    if (!user) throw new UserNotFound('Usuario no encontrado');
+    return await user.update({...updates, password:updates.password ?? user.password}); 
+  }
+
+  async updateUserTotal(userId: string, userData: User) {
+    const user = await User.findByPk(userId);
+    if (!user) throw new UserNotFound('Usuario no encontrado');
+    //return await user.update(userData); cuando el modelo tenga la propiedad password se usara esta linea
+  }
+  
 }

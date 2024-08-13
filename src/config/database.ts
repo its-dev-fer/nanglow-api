@@ -16,7 +16,7 @@ const sequelize = new Sequelize({
     },
     host: process.env.DB_HOST ?? 'localhost',
     username: process.env.DB_USER ?? 'root',
-    password: process.env.DB_PASSWORD ?? '', // Cambia esto por tu contraseña
+    password: process.env.DB_PASSWORD ?? 'nanoPassword13/08', // Cambia esto por tu contraseña
     database: process.env.DB_NAME ?? 'nanoglow', // Cambia esto por el nombre de tu base de datos
     models: [User],
 });
