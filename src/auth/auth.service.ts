@@ -15,4 +15,12 @@ export class AuthService {
   async login(email: string, password: string) {
     //
   }
+
+  async updatePartial(userId: string, updates: Partial<User>) {
+    return await this.authRepository.updateUserPartial(userId, updates);
+  }
+
+  async updateTotal(userId: string, userData: User) {
+    return await this.authRepository.updateUserTotal(userId, userData);
+  }
 }
