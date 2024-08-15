@@ -55,6 +55,7 @@ export class User extends Model {
   })
   updatedAt?: Date;
 
+  @AllowNull(false)
   @Column({
     type: DataType.ENUM(
       PermisosUsuario.ADMINISTRADOR,
@@ -62,5 +63,4 @@ export class User extends Model {
     ),
   })
   permisos!: PermisosUsuario;
-
 }
