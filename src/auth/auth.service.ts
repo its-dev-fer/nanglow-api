@@ -1,5 +1,8 @@
-import { User } from '../models/User';
-import { AuthRepository } from './auth.repository';
+import { User } from "../models/User";
+import { AuthRepository } from "./auth.repository";
+
+const bcrypt = require('bcrypt');
+
 
 export class AuthService {
   private authRepository: AuthRepository;
@@ -8,8 +11,12 @@ export class AuthService {
     this.authRepository = new AuthRepository();
   }
 
-  async register(user: Partial<User>) {
-    //
+  async createUser(user: Partial<User>) {
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(user.password, saltRounds);
+    user.password = hashedPassword;
+    const newUser = await this.authRepository.createUser(user);
+    return newUser;
   }
 
   async login(email: string, password: string) {

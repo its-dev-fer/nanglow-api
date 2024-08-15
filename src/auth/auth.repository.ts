@@ -6,10 +6,11 @@ export class AuthRepository {
     //
   }
 
-  async createUser(user: Partial<User>) {
-    //
+  async createUser(user: Partial<User>):Promise <User | null> {
+    const userC = await User.create(user);
+    
+    return userC;
   }
-
 
   async updateUserPartial(userId: string, updates: Partial<User>) {
     const user = await User.findByPk(userId);
