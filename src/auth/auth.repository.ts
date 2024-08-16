@@ -22,11 +22,7 @@ export class AuthRepository {
   async updateUserTotal(userId: string, userData: User) {
     const user = await User.findByPk(userId);
     if (!user) throw new UserNotFound('Usuario no encontrado');
-<<<<<<< HEAD
     return await user.update(userData);
-=======
-    return await user.update(userData); 
->>>>>>> ea3ca29 (index modificado con el sequelize para que funcione el update)
   }
 
   async deleteUser(userId: string) {
