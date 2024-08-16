@@ -1,7 +1,7 @@
 require("dotenv").config();
 import express, { Request, Response } from "express";
+import { composeMigrations } from "./scripts/generate-migrations";
 import { db } from "./config/database";
-// routes
 import authRoutes from "./auth/auth.routes";
 
 const app = express();
@@ -18,8 +18,11 @@ const startServer = async () => {
   try {
     await db.sequelize.authenticate();
     console.log("Conexión con la base de datos establecida.");
-    if (process.env.ENVIRONMENT === "development")await db.sequelize.sync({ alter: true });
-    console.log("Modelos sincronizados.");
+    if (process.env.ENVIRONMENT === "development") {
+      await db.sequelize.sync({ alter: true });
+      await composeMigrations();
+      console.log("Modelos sincronizados.");
+    }
 
     app.listen(port, () => {
       console.log(`Server is running on http://localhost:${port}`);

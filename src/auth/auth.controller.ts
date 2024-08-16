@@ -62,9 +62,44 @@ export class AuthController {
       if (error instanceof UserNotFound) {
         return res.status(404).json({ message: error.message });
       }
-      return res
-        .status(500)
-        .json({ message: "Error al actualizar el usuario completamente" });
+      return res.status(500).json({ message: 'Error al actualizar el usuario completamente' });
+    }
+  }
+
+  async deleteUser(req: Request, res: Response) {
+    try {
+      const userId = req.params.id;
+      await this.authService.deleteUser(userId);
+      return res.status(204).send(); // Respuesta sin contenido
+    } catch (error) {
+      if (error instanceof UserNotFound) {
+        return res.status(404).json({ message: error.message });
+      }
+      return res.status(500).json({ message: 'Error al eliminar usuario' });
+    }
+  }
+
+  // Nuevo método para obtener todos los usuarios, incluidos los eliminados
+  async getAllUsersIncludingDeleted(req: Request, res: Response) {
+    try {
+      const users = await this.authService.getAllUsersIncludingDeleted();
+      return res.status(200).json(users);
+    } catch (error) {
+      return res.status(500).json({ message: 'Error al obtener usuarios' });
+    }
+  }
+
+  // Nuevo método para obtener un usuario específico, incluidos los eliminados
+  async getUserByIdIncludingDeleted(req: Request, res: Response) {
+    try {
+      const userId = req.params.id;
+      const user = await this.authService.getUserByIdIncludingDeleted(userId);
+      return res.status(200).json(user);
+    } catch (error) {
+      if (error instanceof UserNotFound) {
+        return res.status(404).json({ message: error.message });
+      }
+      return res.status(500).json({ message: 'Error al obtener usuario' });
     }
   }
 }

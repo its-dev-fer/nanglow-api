@@ -13,9 +13,9 @@ const db: dbType = {} as dbType;
 const sequelize = new Sequelize({
     dialect: 'postgres',
     host: process.env.DB_HOST ?? 'localhost',
-    username: process.env.DB_USER ?? 'root',
-    password: process.env.DB_PASSWORD ?? 'ArellunasP13', // Cambia esto por tu contraseña
-    database: process.env.DB_NAME ?? 'postgres', // Cambia esto por el nombre de tu base de datos
+    username: process.env.DB_USER ?? 'lizzy',
+    password: process.env.DB_PASSWORD ?? '1980',
+    database: process.env.DB_NAME ?? 'nanoglow',
     models: [User],
 });
 

@@ -1,9 +1,8 @@
 import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement, AllowNull, Unique } from 'sequelize-typescript';
 import { PermisosUsuario } from '../enums/PermisosUsuario';
 
-
-@Table ({timestamps: true})
-export class User extends Model {
+@Table({ timestamps: true, paranoid: true }) // Configuración para soft delete
+export class User extends Model<User> {
   @PrimaryKey
   @AutoIncrement
   @AllowNull(false)
@@ -43,13 +42,13 @@ export class User extends Model {
   })
   correo!: string;
 
-  @AllowNull(false)
+  @AllowNull(true)
   @Column({
     type: DataType.DATE,
   })
   createdAt?: Date;
 
-  @AllowNull(false)
+  @AllowNull(true)
   @Column({
     type: DataType.DATE,
   })
