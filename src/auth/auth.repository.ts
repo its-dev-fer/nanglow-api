@@ -16,13 +16,30 @@ export class AuthRepository {
   async updateUserPartial(userId: string, updates: Partial<User>) {
     const user = await User.findByPk(userId);
     if (!user) throw new UserNotFound('Usuario no encontrado');
-    return await user.update({...updates, password:updates.password ?? user.password}); 
+    return await user.update({ ...updates, password: updates.password ?? user.password });
   }
 
   async updateUserTotal(userId: string, userData: User) {
     const user = await User.findByPk(userId);
     if (!user) throw new UserNotFound('Usuario no encontrado');
-    return await user.update(userData); 
+    return await user.update(userData);
   }
-  
+
+  async deleteUser(userId: string) {
+    const user = await User.findByPk(userId);
+    if (!user) throw new UserNotFound('Usuario no encontrado');
+    await user.destroy(); // Realiza la eliminación suave
+  }
+
+  // método para obtener todos los usuarios, incluidos los eliminados
+  async findAllUsersIncludingDeleted() {
+    return await User.findAll({ paranoid: false });
+  }
+
+  //método para obtener un usuario específico, incluidos los eliminados
+  async findUserByIdIncludingDeleted(userId: string) {
+    const user = await User.findByPk(userId, { paranoid: false });
+    if (!user) throw new UserNotFound('Usuario no encontrado');
+    return user;
+  }
 }

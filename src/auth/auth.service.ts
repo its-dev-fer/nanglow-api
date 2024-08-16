@@ -46,6 +46,20 @@ export class AuthService {
   async updateTotal(userId: string, userData: User) {
     return await this.authRepository.updateUserTotal(userId, userData);
   }
+
+  async deleteUser(userId: string) {
+    await this.authRepository.deleteUser(userId);
+  }
+
+  // método para obtener todos los usuarios, incluidos los eliminados
+  async getAllUsersIncludingDeleted() {
+    return await this.authRepository.findAllUsersIncludingDeleted();
+  }
+
+  // método para obtener un usuario específico, incluidos los eliminados
+  async getUserByIdIncludingDeleted(userId: string) {
+    return await this.authRepository.findUserByIdIncludingDeleted(userId);
+  }
 }
 
 
