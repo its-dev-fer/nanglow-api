@@ -8,7 +8,7 @@ export class AuthRepository {
   }
 
   async createUser(user: Partial<User>):Promise <User | null> {
-    const userC = await User.create(user);
+    const userC = await User.create(user as User);
     
     return userC;
   }

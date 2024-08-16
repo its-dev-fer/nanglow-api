@@ -13,13 +13,14 @@ module.exports = {
       apellido: { type: Sequelize.STRING, allowNull: false },
       password: { type: Sequelize.STRING, allowNull: false },
       rfc: { type: Sequelize.STRING, allowNull: false },
-      correo: { type: Sequelize.STRING, allowNull: false },
-      createdAt: { type: Sequelize.DATE, allowNull: false },
-      updatedAt: { type: Sequelize.DATE, allowNull: false },
+      correo: { type: Sequelize.STRING, allowNull: false, unique: true },
+      createdAt: { type: Sequelize.DATE, allowNull: true },
+      updatedAt: { type: Sequelize.DATE, allowNull: true },
       permisos: {
         type: Sequelize.ENUM("ADMINISTRADOR", "CLIENTE"),
         allowNull: false,
       },
+      deletedAt: { type: Sequelize.DATE },
     });
   },
   down: async (queryInterface, Sequelize) => {
