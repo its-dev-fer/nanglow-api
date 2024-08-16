@@ -3,7 +3,8 @@ import { User } from '../models/User';
 
 export class AuthRepository {
   async findUserByEmail(email: string) {
-    //
+      const user = await User.findOne({ where: { correo: email } });
+      return user;
   }
 
   async createUser(user: Partial<User>):Promise <User | null> {

@@ -14,10 +14,9 @@ const sequelize = new Sequelize({
     dialect: 'postgres',
     host: process.env.DB_HOST ?? 'localhost',
     username: process.env.DB_USER ?? 'root',
-    password: process.env.DB_PASSWORD ?? 'Dajagohe3007',
-    database: process.env.DB_NAME ?? 'postgres',
-    models: [User], // Aquí es donde se registran los modelos
-    logging: false, // Desactivar logging de SQL, puedes activarlo si necesitas depurar
+    password: process.env.DB_PASSWORD ?? 'ArellunasP13', // Cambia esto por tu contraseña
+    database: process.env.DB_NAME ?? 'postgres', // Cambia esto por el nombre de tu base de datos
+    models: [User],
 });
 
 db.sequelize = sequelize;

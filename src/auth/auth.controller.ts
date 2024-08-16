@@ -20,6 +20,22 @@ export class AuthController {
     }
   }
 
+  async login(req: Request, res: Response) {
+    try {
+      const { email, password } = req.body;
+      const result = await this.authService.login(email, password);
+      return res.status(200).json(result);
+    } catch (error) {
+      if (error instanceof UserNotFound) {
+        return res.status(404).json({ message: error.message });
+      } else if (error instanceof Error) {
+        return res.status(400).json({ message: error.message });
+      }
+      return res.status(500).json({ message: 'Error en el servidor' });
+    }
+  }
+
+
   async updateUserPartial(req: Request, res: Response) {
     try {
       const userId = req.params.id;
