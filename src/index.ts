@@ -1,8 +1,8 @@
 require("dotenv").config();
 import express, { Request, Response } from "express";
 import { composeMigrations } from "./scripts/generate-migrations";
-import { db } from "./config/database";
-import authRoutes from "./auth/auth.routes";
+import { db } from './config/database'; 
+import authRoutes from './auth/auth.routes';
 
 const app = express();
 const port = process.env.PORT || 3000;
