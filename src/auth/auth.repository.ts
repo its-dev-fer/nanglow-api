@@ -22,7 +22,7 @@ export class AuthRepository {
   async updateUserTotal(userId: string, userData: User) {
     const user = await User.findByPk(userId);
     if (!user) throw new UserNotFound('Usuario no encontrado');
-    //return await user.update(userData); cuando el modelo tenga la propiedad password se usara esta linea
+    return await user.update(userData); 
   }
   
 }
