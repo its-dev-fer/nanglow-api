@@ -1,4 +1,4 @@
-import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement, AllowNull } from 'sequelize-typescript';
+import { Table, Column, Model, DataType, PrimaryKey, AutoIncrement, AllowNull, Unique } from 'sequelize-typescript';
 import { PermisosUsuario } from '../enums/PermisosUsuario';
 
 
@@ -36,6 +36,7 @@ export class User extends Model {
   })
   rfc!: string;
 
+  @Unique
   @AllowNull(false)
   @Column({
     type: DataType.STRING,
@@ -62,7 +63,4 @@ export class User extends Model {
     ),
   })
   permisos!: PermisosUsuario;
-  
-
-
 }

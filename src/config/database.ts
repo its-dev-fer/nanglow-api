@@ -1,5 +1,6 @@
+// src/config/database.ts
 import { Sequelize } from 'sequelize-typescript';
-import { Op } from "sequelize";
+import { Op } from 'sequelize';
 import { User } from '../models/User';
 
 type dbType = {
@@ -10,15 +11,13 @@ type dbType = {
 const db: dbType = {} as dbType;
 
 const sequelize = new Sequelize({
-    dialect: "postgres",
-    operatorsAliases: {
-        $iLike: Op.like
-    },
+    dialect: 'postgres',
     host: process.env.DB_HOST ?? 'localhost',
     username: process.env.DB_USER ?? 'root',
-    password: process.env.DB_PASSWORD ?? 'nanoPassword13/08', // Cambia esto por tu contraseña
-    database: process.env.DB_NAME ?? 'nanoglow', // Cambia esto por el nombre de tu base de datos
-    models: [User],
+    password: process.env.DB_PASSWORD ?? 'Dajagohe3007',
+    database: process.env.DB_NAME ?? 'postgres',
+    models: [User], // Aquí es donde se registran los modelos
+    logging: false, // Desactivar logging de SQL, puedes activarlo si necesitas depurar
 });
 
 db.sequelize = sequelize;

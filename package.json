@@ -1,6 +1,6 @@
 {
   "name": "nanoglow-designs-api",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -14,8 +14,11 @@
   "license": "ISC",
   "dependencies": {
     "@sequelize/postgres": "^7.0.0-alpha.41",
+    "@types/bcrypt": "^5.0.2",
     "@types/express": "^4.17.21",
     "@types/node": "^20.14.10",
+    "bcrypt": "^5.1.1",
+    "bcrypt-ts": "^5.0.2",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "pg": "^8.12.0",

@@ -1,8 +1,8 @@
 {
   "development": {
     "username": "postgres",
-    "password": null, 
-    "database": "nanoglow",
+    "password": "Dajagohe3007", 
+    "database": "postgres",
     "host": "127.0.0.1",
     "dialect": "postgres"
   }

@@ -1,12 +1,23 @@
-import { Request, Response } from 'express';
-import { AuthService } from './auth.service';
-import { UserNotFound } from '../exceptions/UserNotFound.exception';
+import { Request, Response } from "express";
+import { AuthService } from "./auth.service";
+import { UserNotFound } from "../exceptions/UserNotFound.exception";
+import { PermisosUsuario } from "../enums/PermisosUsuario";
 
 export class AuthController {
   private authService: AuthService;
 
   constructor() {
     this.authService = new AuthService();
+  }
+
+  async createUser(req: Request, res: Response) {
+    try {
+      const newUserP = {...req.body, permisos : PermisosUsuario.CLIENTE}
+      const newUser = await this.authService.createUser(newUserP);
+      return res.status(201).json({ message: "Usuario creado con éxito", user: newUser });
+    } catch (error) {
+      res.status(400).json({ message: error });
+    }
   }
 
   async updateUserPartial(req: Request, res: Response) {
@@ -19,7 +30,9 @@ export class AuthController {
       if (error instanceof UserNotFound) {
         return res.status(404).json({ message: error.message });
       }
-      return res.status(500).json({ message: 'Error al actualizar el usuario parcialmente'});
+      return res
+        .status(500)
+        .json({ message: "Error al actualizar el usuario parcialmente" });
     }
   }
 
@@ -33,7 +46,9 @@ export class AuthController {
       if (error instanceof UserNotFound) {
         return res.status(404).json({ message: error.message });
       }
-      return res.status(500).json({ message: 'Error al actualizar el usuario completamente'});
+      return res
+        .status(500)
+        .json({ message: "Error al actualizar el usuario completamente" });
     }
   }
 }
