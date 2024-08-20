@@ -38,9 +38,9 @@ export class Product extends Model<Product> {
 
   @AllowNull(false)
   @Column({
-    type: DataType.STRING,
+    type: DataType.INTEGER,
   })
-  categoria!: string;
+  categoria!: number;
 
   @AllowNull(false)
   @Column({
