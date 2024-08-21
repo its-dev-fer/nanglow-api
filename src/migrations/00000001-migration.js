@@ -22,8 +22,25 @@ module.exports = {
       },
       deletedAt: { type: Sequelize.DATE },
     });
+    await queryInterface.createTable("Products", {
+      id: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+      },
+      titulo: { type: Sequelize.STRING, allowNull: false },
+      precio: { type: Sequelize.FLOAT, allowNull: false },
+      descripcion: { type: Sequelize.TEXT, allowNull: false },
+      categoria: { type: Sequelize.INTEGER, allowNull: false },
+      urls: { type: Sequelize.ARRAY(Sequelize.STRING), allowNull: false },
+      createdAt: { type: Sequelize.DATE, allowNull: true },
+      updatedAt: { type: Sequelize.DATE, allowNull: true },
+      deletedAt: { type: Sequelize.DATE },
+    });
   },
   down: async (queryInterface, Sequelize) => {
     await queryInterface.dropTable("Users");
+    await queryInterface.dropTable("Products");
   },
 };
