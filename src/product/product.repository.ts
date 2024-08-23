@@ -1,5 +1,20 @@
 import { Product } from "../models/Product";
 
+//  excepción 
+class ProductCategoryNotFoundError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = "ProductCategoryNotFoundError";
+  }
+}
+
+interface WhereProducts {  
+  where: {  
+    categoria: number;  
+  };  
+  limit?: number;  
+}
+
 export class ProductRepository {
   async createProduct(productData: Partial<Product>): Promise<Product | null> {
     try {
@@ -13,7 +28,7 @@ export class ProductRepository {
 
   async findProductsByCategory(id_categoria: number, limit?: number): Promise<Product[]> {
     try {
-      const options: { where: { categoria: number }; limit?: number } = {
+      const options: WhereProducts = {
         where: { categoria: id_categoria },
       };
 
@@ -24,8 +39,8 @@ export class ProductRepository {
       const products = await Product.findAll(options);
       return products;
     } catch (error) {
-     
-      throw new Error(`Error al encontrar productos por categoría: ${error}`);
+      
+      throw new ProductCategoryNotFoundError(`Error al encontrar productos por categoría: ${error}`);
     }
   }
 }

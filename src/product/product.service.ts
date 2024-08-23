@@ -1,6 +1,6 @@
 import { ProductRepository } from "./product.repository";
 import { Product } from "../models/Product";
-import test from "node:test";
+
 
 export class ProductService {
   private productRepository: ProductRepository;
@@ -8,10 +8,13 @@ export class ProductService {
   constructor() {
     this.productRepository = new ProductRepository();
   }
+  
   async createProduct(productData: Partial<Product>): Promise<Product | null> {
     return this.productRepository.createProduct(productData);
   }
+  
   async getProductsByCategory(
+  
     id_categoria: number,
     limit?: number
   ): Promise<Product[]> {

@@ -17,6 +17,7 @@ export class ProductController {
       res.status(500).json({ message: "Error creating product", error });
     }
   }
+
   async getProductsByCategory(req: Request, res: Response): Promise<void> {
     try {
       const { id_categoria } = req.params;
