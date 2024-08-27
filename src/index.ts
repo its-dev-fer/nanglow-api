@@ -3,12 +3,15 @@ import express, { Request, Response } from "express";
 import { composeMigrations } from "./scripts/generate-migrations";
 import { db } from "./config/database";
 import authRoutes from "./auth/auth.routes";
+import router from "./categoria/categoria.routes";
 
 const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use("/auth", authRoutes);
+app.use("/categorias", router);
+
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello World!");
